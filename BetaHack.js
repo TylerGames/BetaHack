@@ -166,3 +166,4 @@ if(tapspam)net.zhuoweizhang.mcpelauncher.ScriptManager.nativeSendChat(stext);
 
 
 }
+}
