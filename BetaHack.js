@@ -100,7 +100,7 @@ var tb = new android.widget.ToggleButton(ctx);
       tg = false;
       tapspam = false;
       }
-      button.setChecked(tg);
+      tb.setChecked(tg);
       }
       }));
       menuLayout.addView(tb);
