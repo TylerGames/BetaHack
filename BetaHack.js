@@ -138,12 +138,12 @@ button3.setText("Tap break is "+(tapbreak?"activated":"deactivated"));
 button3.setTextColor(Color.RED);
             button3.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
-             gamemode?gamemode=false:gamemode=true;
+             tapbreak?tapbreak=false:tapbreak=true;
 button3.setText("Tap break is "+(tapbreak?"activated":"deactivated"));
-if(gamemode == true){
+if(tapbreak == true){
 button3.setTextColor(Color.GREEN);
 }
-if(gamemode == false){
+if(tapbreak == false){
 button3.setTextColor(Color.RED);
 }
                 }
