@@ -25,19 +25,21 @@ var authers = "TylerGamesTV";
 
 var tg = false;
 var tapspam = false;
+var tapbreak = false;
+var gamemode = false;
 
 function dip2px(dips){
     return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
 }
 
-function showMenuBtn(){
+function showButton(){
 ctx.runOnUiThread(new Runnable({ run: function(){
     try{
         var layout = new LinearLayout(ctx);
         layout.setOrientation(1);
         var menuBtn = new Button(ctx);
 menuBtn.setTextSize(20);
-        menuBtn.setText("Tylers mod");
+        menuBtn.setText(name);
         menuBtn.setOnClickListener(new View.OnClickListener({
             onClick: function(viewarg){
 
@@ -58,7 +60,7 @@ GUI.dismiss();
         }
     }}));
 }
-showMenuBtn(); 
+showButton(); 
 function mainMenu(){
     ctx.runOnUiThread(new Runnable({ run: function(){
         try{
@@ -70,48 +72,48 @@ function mainMenu(){
             menuScroll.addView(menuLayout);
             menuLayout1.addView(menuScroll);
 
-//i suggestion a textView here with mod name and version and developer
+        var title = new android.widget.TextView(ctx);
+        title.setGravity(android.view.Gravity.CENTER);
+		title.setText(name + version + "\nBy " + authers + " " + ArceusMatt);
+       title.setTextColor(Color.WHITE);
+		title.setTextSize(20);
+		menuLayout.addView(title);
 
-
-
-
-var exitb = new Button(ctx);
-            exitb.setText("Exit");
-exitb.setTextColor(Color.RED);
-            exitb.setOnClickListener(new View.OnClickListener({
+var exit = new Button(ctx);
+            exit.setText("Exit");
+exit.setTextColor(Color.RED);
+            exit.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
 
                     menu.dismiss(); 
 
-showMenuBtn();
+showButton();
                 }
             }));
-            menuLayout.addView(exitb);
+            menuLayout.addView(exit);
 
-var tb = new android.widget.ToggleButton(ctx);
-      tb.setText('Tap spammer');
-      tb.setChecked(tg);
-      tb.setOnClickListener(new android.view.View.OnClickListener({
-      onClick: function(viewarg){
-      if(!tg){
-      tg = true;
-      editSpam();
-      }else{
-      tg = false;
-      tapspam = false;
-      }
-      tb.setChecked(tg);
-      }
-      }));
-      menuLayout.addView(tb);
-
-//Other buttons etc go below here
-
-
-
+//This fixes the old spammer crashing
+var button1 = new Button(ctx);
+button1.setText("Tap spam is "+(tapspam?"activated":"deactivated"));
+button1.setTextColor(Color.RED);
+            button1.setOnClickListener(new View.OnClickListener({
+                onClick: function(viewarg){
+             tapspam?tapspam=false:tapspam=true;
+button1.setText("Tap spam is "+(tapspam?"activated":"deactivated"));
+if(tapspam == true){
+button1.setTextColor(Color.GREEN);
+editSpam();
+}
+if(tapspam == false){
+button1.setTextColor(Color.RED);
+tapspam false;
+}
+                }
+            }));
+            menuLayout.addView(button1);
 
 menu = new PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
-           menu.setBackgroundDrawable(new ColorDrawable(Color.GREEN));
+           menu.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             menu.showAtLocation(ctx.getWindow().getDecorView(), Gravity.RIGHT | Gravity.TOP, 0, 0);
             }catch(error){
                 Toast.makeText(ctx, "An error occured: " + error, 1).show();
@@ -158,12 +160,6 @@ print("Spam Dialog Error:"+e);
 }});
 }
 
-function useItem(x, y, z, itemId, blockId, side)
-{
+function useItem(x, y, z, itemId, blockId, side) {
 if(tapspam)net.zhuoweizhang.mcpelauncher.ScriptManager.nativeSendChat(stext);
-
-//continue useItem below
-
-
-}
 }
