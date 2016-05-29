@@ -23,10 +23,14 @@ var version = "0.1";
 var name = "BetaHack";
 var authers = "TylerGamesTV";
 
-var tg = false;
 var tapspam = false;
 var tapbreak = false;
 var gamemode = false;
+var info = false;
+
+var getMode = Level.getGameMode();
+if(getMode="0")gamemode = false;
+if(getMode="1")gamemode = true;
 
 function dip2px(dips){
     return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
@@ -81,7 +85,6 @@ function mainMenu(){
 
 var exit = new Button(ctx);
             exit.setText("Exit");
-exit.setTextColor(Color.RED);
             exit.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
 
@@ -111,6 +114,59 @@ tapspam false;
                 }
             }));
             menuLayout.addView(button1);
+            
+            //i may have messed up but this changes gamemode
+            var button2 = new Button(ctx);
+button2.setText(""+(gamemode?"Creative":"Survival"));
+button2.setTextColor(Color.WHITE);
+            button2.setOnClickListener(new View.OnClickListener({
+                onClick: function(viewarg){
+             gamemode?gamemode=false:gamemode=true;
+button2.setText(""+(gamemode?"Creative":"Survival"));
+if(gamemode == true){
+Level.setGameMode(1);
+}
+if(gamemode == false){
+Level.setGameMode(1);
+}
+                }
+            }));
+            menuLayout.addView(button2);
+            
+            var button3 = new Button(ctx);
+button3.setText("Tap break is "+(tapbreak?"activated":"deactivated"));
+button3.setTextColor(Color.RED);
+            button3.setOnClickListener(new View.OnClickListener({
+                onClick: function(viewarg){
+             gamemode?gamemode=false:gamemode=true;
+button3.setText("Tap break is "+(tapbreak?"activated":"deactivated"));
+if(gamemode == true){
+button3.setTextColor(Color.GREEN);
+}
+if(gamemode == false){
+button3.setTextColor(Color.RED);
+}
+                }
+            }));
+            menuLayout.addView(button3);
+            
+            
+           var button4 = new Button(ctx);
+button4.setText("Item & xyz "+(info?"activated":"deactivated"));
+button4.setTextColor(Color.RED);
+            button4.setOnClickListener(new View.OnClickListener({
+                onClick: function(viewarg){
+             gamemode?gamemode=false:gamemode=true;
+button4.setText("Item & xyz "+(info?"activated":"deactivated"));
+if(info == true){
+button4.setTextColor(Color.GREEN);
+}
+if(info == false){
+button4.setTextColor(Color.RED);
+}
+                }
+            }));
+            menuLayout.addView(button4);
 
 menu = new PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
            menu.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -160,6 +216,23 @@ print("Spam Dialog Error:"+e);
 }});
 }
 
+function modTick() {
+	if(info)ModPE.showTipMessage("x" + Math.round(getPlayerX()) + ", y" + Math.round(getPlayerY()) + ", z" + Math.round(getPlayerZ()) + "\n	Item ID " + Player.getCarriedItem() + ":" + Player.getCarriedItemData() + ", Amount: " + Player.getCarriedItemData());
+}
+
 function useItem(x, y, z, itemId, blockId, side) {
 if(tapspam)net.zhuoweizhang.mcpelauncher.ScriptManager.nativeSendChat(stext);
+if(tapbreak){
+	Level.destroyBlock(x +1, y, z +1, false);
+	Level.destroyBlock(x +2, y, z +2, false);
+	Level.destroyBlock(x +3, y, z +3, false);
+	Level.destroyBlock(x +4, y, z +4, false);
+	
+    Level.destroyBlock(x, y, z, false);
+
+	Level.destroyBlock(x -1, y, z -1, false);
+	Level.destroyBlock(x -2, y, z -2, false);
+	Level.destroyBlock(x -3, y, z -3, false);
+	Level.destroyBlock(x -4, y, z -4, false);
+}
 }
