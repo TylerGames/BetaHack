@@ -126,7 +126,7 @@ if(gamemode == true){
 Level.setGameMode(1);
 }
 if(gamemode == false){
-Level.setGameMode(1);
+Level.setGameMode(0);
 }
                 }
             }));
@@ -155,7 +155,7 @@ button4.setText("Item & xyz "+(info?"activated":"deactivated"));
 button4.setTextColor(Color.RED);
             button4.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
-             gamemode?gamemode=false:gamemode=true;
+             info?info=false:info=true;
 button4.setText("Item & xyz "+(info?"activated":"deactivated"));
 if(info == true){
 button4.setTextColor(Color.GREEN);
