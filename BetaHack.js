@@ -99,6 +99,7 @@ showButton();
 var button1 = new Button(ctx);
 button1.setText("Tap spam is "+(tapspam?"activated":"deactivated"));
 button1.setTextColor(Color.RED);
+if(tapspam==true)button1.setTextColor(Color.GREEN);
             button1.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
              tapspam?tapspam=false:tapspam=true;
@@ -135,6 +136,7 @@ Level.setGameMode(0);
             var button3 = new Button(ctx);
 button3.setText("Tap break is "+(tapbreak?"activated":"deactivated"));
 button3.setTextColor(Color.RED);
+if(tapbreak==true)button3.setTextColor(Color.GREEN);
             button3.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
              tapbreak?tapbreak=false:tapbreak=true;
@@ -153,6 +155,7 @@ button3.setTextColor(Color.RED);
            var button4 = new Button(ctx);
 button4.setText("Item & xyz "+(info?"activated":"deactivated"));
 button4.setTextColor(Color.RED);
+if(info==true)button4.setTextColor(Color.GREEN);
             button4.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
              info?info=false:info=true;
@@ -166,6 +169,15 @@ button4.setTextColor(Color.RED);
                 }
             }));
             menuLayout.addView(button4);
+            
+            var button5 = new Button(ctx);
+button5.setText("Edit speed");
+            button5.setOnClickListener(new View.OnClickListener({
+                onClick: function(viewarg){
+editSpeed();
+                }
+            }));
+            menuLayout.addView(button5);
 
 menu = new PopupWindow(menuLayout1, ctx.getWindowManager().getDefaultDisplay().getWidth()/3, ctx.getWindowManager().getDefaultDisplay().getHeight());
            menu.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -213,6 +225,49 @@ ts.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.TOP, 0, 0
 print("Spam Dialog Error:"+e);
 }
 }});
+}
+
+function editSpeed() {
+ctx.runOnUiThread(new java.lang.Runnable(){
+run: function(){ 
+try{
+es = new android.widget.PopupWindow();
+var Lay = new android.widget.LinearLayout(ctx);
+var tsp = new android.widget.EditText(ctx);
+var Dialog = new android.app.Dialog(ctx);
+var Exit = new android.widget.Button(ctx);
+
+Dialog.setTitle("Enter speed number");
+Dialog.setContentView(Lay);
+
+Lay.setOrientation(android.widget.LinearLayout.VERTICAL);
+Dialog.show();
+Lay.addView(txx);
+Lay.addView(Exit);
+
+tsp.setText("");
+tsp.setHint("20 normal speed")
+Exit.setText("done");
+
+Exit.setOnClickListener(new android.view.View.OnClickListener(){
+onClick: function(view){
+speed =tsp.getText();
+start();
+Dialog.dismiss();
+}
+});
+
+es.setHeight(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+es.setWidth(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+es.showAtLocation(ctx.getWindow().getDecorView(), android.view.Gravity.TOP, 0, 0);
+} catch (e){
+print("speed Dialog Error:"+e);
+}
+}});
+}
+
+function start(){
+ModPE.setGameSpeed(speed);	
 }
 
 function modTick() {
