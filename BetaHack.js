@@ -78,7 +78,7 @@ function mainMenu(){
 
         var title = new android.widget.TextView(ctx);
         title.setGravity(android.view.Gravity.CENTER);
-		title.setText(name + version + "\nBy " + authers + " " + ArceusMatt);
+		title.setText(name + version + "\nBy " + authers + " " + "ArceusMatt");
        title.setTextColor(Color.WHITE);
 		title.setTextSize(20);
 		menuLayout.addView(title);
@@ -109,7 +109,7 @@ editSpam();
 }
 if(tapspam == false){
 button1.setTextColor(Color.RED);
-tapspam false;
+tapspam = false;
 }
                 }
             }));
@@ -118,7 +118,6 @@ tapspam false;
             //i may have messed up but this changes gamemode
             var button2 = new Button(ctx);
 button2.setText(""+(gamemode?"Creative":"Survival"));
-button2.setTextColor(Color.WHITE);
             button2.setOnClickListener(new View.OnClickListener({
                 onClick: function(viewarg){
              gamemode?gamemode=false:gamemode=true;
